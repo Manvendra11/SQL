@@ -1,0 +1,24 @@
+select round(sum(long_w),4) as sum FROM station
+where long_w > 38.7880 AND long_w < 137.2345
+
+SELECT round(max(lat_n),4) as max from station
+where lat_n < 138.2523
+
+SELECT
+query_name,
+ROUND(AVG(rating/position), 2) AS quality,
+ROUND(AVG(rating < 3)*100, 2) AS poor_query_percentage
+FROM queries
+GROUP BY query_name
+ORDER BY query_name;
+
+
+SELECT department_id AS 'Department', count(*) AS 'No_of_employees',
+CASE 
+    WHEN count(*) = 1 THEN 'Junior Department' 
+    WHEN count(*) <= 4 THEN 'Intermediate Department' 
+    WHEN count(*) > 4 THEN 'Senior Department'
+END AS Department_level
+FROM employees
+GROUP BY department_id
+ORDER BY No_of_employees, Department
